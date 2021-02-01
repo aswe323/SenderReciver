@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">senderReciverApp</string>
+    <string name="Button_Send">Send</string>
+</resources>
