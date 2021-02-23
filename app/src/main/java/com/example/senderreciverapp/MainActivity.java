@@ -36,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         ip = getIP();
         setContentView(R.layout.activity_main);
 
-
         recivedElement =  (TextView) findViewById(R.id.MessageRecivedDisplay);
         ipDisplay = (TextView) findViewById(R.id.IPDisplay);
         ipDisplay.setText(ip);
@@ -61,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
                 recivedElement.setText(s);
             }
         };
-        Log.d("test", "onCreate: Ip is:" + ip);
 
 
     }
