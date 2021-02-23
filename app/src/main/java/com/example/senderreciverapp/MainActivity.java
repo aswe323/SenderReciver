@@ -23,22 +23,24 @@ import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.URL;
 import java.util.Observable;
+import java.util.Scanner;
+import java.util.concurrent.BlockingDeque;
 
 public class MainActivity extends AppCompatActivity {
     public SenderReciver senderReciver;//Gets assigned in the bindService call in the onCreate callback method.
     private TextView recivedElement;
-    private String ip;
+    static private String ip;
     private TextView ipDisplay;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ip = getIP();
+        initIP();
         setContentView(R.layout.activity_main);
 
         recivedElement =  (TextView) findViewById(R.id.MessageRecivedDisplay);
         ipDisplay = (TextView) findViewById(R.id.IPDisplay);
-        ipDisplay.setText(ip);
         Intent intent = new Intent(this,SenderReciver.class);
         ServiceConnection connection = new ServiceConnection() {
             @Override
@@ -62,12 +64,21 @@ public class MainActivity extends AppCompatActivity {
         };
 
 
+
     }
 
-    public String getIP(){
-        WifiManager wifiManager = (WifiManager) getApplication().getSystemService(WIFI_SERVICE);
-        String ipAddress = Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress());
-        return ipAddress;
+
+    public void initIP(){
+        new Thread( () ->   {
+            try (Scanner s = new Scanner(new URL("https://api.ipify.org").openStream(), "UTF-8").useDelimiter("\\A")) {
+                ip = "" + s.next();
+                ipDisplay.setText("" + ip);
+
+                Log.d("test", "initIP: " + ip);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
     public void buttonPressed(View view) {
         senderReciver.sendData(
