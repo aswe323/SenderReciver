@@ -39,8 +39,9 @@ public class MainActivity extends AppCompatActivity {
         initIP();
         setContentView(R.layout.activity_main);
 
-        recivedElement =  (TextView) findViewById(R.id.MessageRecivedDisplay);
-        ipDisplay = (TextView) findViewById(R.id.IPDisplay);
+        recivedElement = findViewById(R.id.MessageRecivedDisplay);
+        ipDisplay = findViewById(R.id.IPDisplay);
+
         Intent intent = new Intent(this,SenderReciver.class);
         ServiceConnection connection = new ServiceConnection() {
             @Override
@@ -56,15 +57,7 @@ public class MainActivity extends AppCompatActivity {
         startService(intent);
         bindService(intent,connection,0);
 
-        Observer<String> observer = new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                recivedElement.setText(s);
-            }
-        };
-
-
-
+        SenderReciver.recived.observe(this, s -> recivedElement.setText(s));
     }
 
 
@@ -81,9 +74,10 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
     public void buttonPressed(View view) {
-        senderReciver.sendData(
-                ((TextView) this.findViewById(R.id.TextInputIP)).getText().toString(),
-                ((TextView) this.findViewById(R.id.TextInputMessage)).getText().toString());
+        String ip = ((TextView) this.findViewById(R.id.TextInputIP)).getText().toString();
+        String message = ((TextView) this.findViewById(R.id.TextInputMessage)).getText().toString();
+        senderReciver.sendData(ip, message);
+        Log.d("networkTraffic", "buttonPressed with data: " + message + " to ip: " + ip);
     }
 
 }

@@ -32,7 +32,6 @@ public class SenderReciver extends Service {
     static private Socket socket;
     final ServerSocket listener = new ServerSocket(7000);
     static MutableLiveData<String> recived = new MutableLiveData<>();
-
     private final IBinder binder = new LocalBinder();
     /**
      * https://developer.android.com/guide/components/bound-services#Binding
@@ -42,9 +41,6 @@ public class SenderReciver extends Service {
             return SenderReciver.this;
         }
     }
-
-
-
 
     static class Socketed implements AutoCloseable, EventListener {
 
@@ -122,7 +118,7 @@ public class SenderReciver extends Service {
                         BufferedReader reader = socketed.getReader();
                         String line = reader.readLine();
                         //Log.d("senderReceiver,Receiver", "startReceiver: received ->\n" + line);
-                        recived.setValue(line);
+                        recived.postValue(line);
                         socketed.send("ack");
                     } catch (Exception e) {
                         e.printStackTrace();

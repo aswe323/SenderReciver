@@ -27,7 +27,7 @@
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="Message To Send"
-        android:inputType="textPersonName"
+        android:inputType="textLongMessage|textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,8 +37,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="100dp"
         android:ems="10"
-        android:hint="IP of reciver"
-        android:inputType="numberSigned"
+        android:hint="IP of receiver"
+        android:inputType="textShortMessage|numberDecimal"
         app:layout_constraintBottom_toTopOf="@+id/TextInputMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +50,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="88dp"
-        android:text="Your IP should be here"
+        android:hint="Your IP should be here"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/RecivedMessageDisplay" />
 
@@ -60,6 +60,7 @@
         android:layout_height="29dp"
         android:layout_marginStart="112dp"
         android:layout_marginTop="92dp"
+        android:hint="Received Message"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/IPDisplay" />
 
