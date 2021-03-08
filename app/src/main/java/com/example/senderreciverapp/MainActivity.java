@@ -60,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
         SenderReciver.recived.observe(this, s -> recivedElement.setText(s));
     }
 
-
     public void initIP(){
         new Thread( () ->   {
             try (Scanner s = new Scanner(new URL("https://api.ipify.org").openStream(), "UTF-8").useDelimiter("\\A")) {
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
+
     public void buttonPressed(View view) {
         String ip = ((TextView) this.findViewById(R.id.TextInputIP)).getText().toString();
         String message = ((TextView) this.findViewById(R.id.TextInputMessage)).getText().toString();

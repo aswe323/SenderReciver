@@ -33,6 +33,8 @@ public class SenderReciver extends Service {
     final ServerSocket listener = new ServerSocket(7000);
     static MutableLiveData<String> recived = new MutableLiveData<>();
     private final IBinder binder = new LocalBinder();
+
+    
     /**
      * https://developer.android.com/guide/components/bound-services#Binding
      */
